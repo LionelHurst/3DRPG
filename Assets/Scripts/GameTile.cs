@@ -4,26 +4,26 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GameTile : Tile
+public class GameTile : MonoBehaviour
 {
     [SerializeField]
     public int cost;
+    public Point pos;
 
     public int GetCost()
     {
         return cost;
     }
-
-    #if UNITY_EDITOR
-    [MenuItem("Assets/Create/GameTile")]
-    public static void CreateGameTile()
+    
+    public void Load(Point p)
     {
-        string path = EditorUtility.SaveFilePanelInProject("Save Game Tile", "New Game Tile", "asset", "Save Game Tile", "Assets");
-        if (path == "")
-            return;
-
-        AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<GameTile>(), path);
+        pos = p;
+        Match();
     }
-    #endif
 
+    void Match()
+    {
+        transform.localPosition = new Vector3(pos.x, 0, pos.y);
+        transform.localScale = new Vector3(1, 0.1f, 1);
+    }
 }

@@ -8,6 +8,9 @@ public abstract class BattleState : State
     public Unit currentUnit;
     public Board board { get { return owner.board; } }
     public Point pos { get { return owner.pos; } set { owner.pos = value; } }
+    public CameraRig cameraRig { get { return owner.cameraRig; } }
+    public Turn turn { get { return owner.turn; } }
+    public List<Unit> units { get { return owner.units; } }
 
     protected virtual void Awake()
     {

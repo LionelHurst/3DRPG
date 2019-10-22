@@ -5,11 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour
 {
-    public Tilemap floorTileMap;
-    public Tilemap wallTileMap;
-
-    public List<GameTile> floorTiles = new List<GameTile>();
+    public List<GameObject> floorTiles = new List<GameObject>();
     public List<GameObject> wallTiles = new List<GameObject>();
+
+    public Dictionary<Point, GameTile> tiles = new Dictionary<Point, GameTile>();
 
     public int mapWidth;
     public int mapHeight;
@@ -33,7 +32,6 @@ public class Board : MonoBehaviour
         mapHeight = height;
 
         _Load();
-
     }
 
     public void Load()
@@ -48,11 +46,12 @@ public class Board : MonoBehaviour
         for (int i = 0; i < mapWidth; i++)
         {
 
-            for (int k = 0; k < mapHeight; k++)
+            for (int j = 0; j < mapHeight; j++)
             {
-                floorTileMap.SetTile(new Vector3Int(i, k, 0), floorTiles[0]);
-                //if (i == 0 || i == mapWidth-1)
-                //Instantiate(wallTiles[0], floorTileMap.CellToWorld(new Vector3(i, k, 0)), Quaternion.identity).GetComponent<GameObject>();
+                GameObject instance = Instantiate(floorTiles[0]) as GameObject;
+                GameTile gt = instance.GetComponent<GameTile>();
+                gt.Load(new Point(i, j));
+                tiles.Add(gt.pos, gt);
             }
         }
     }
