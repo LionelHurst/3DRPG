@@ -23,7 +23,7 @@ public class GameTile : MonoBehaviour
 
     void Match()
     {
-        transform.localPosition = new Vector3(pos.x, 0, pos.y);
-        transform.localScale = new Vector3(1, 0.1f, 1);
+        transform.localPosition = new Vector3(pos.x, -.5f, pos.y);
+        //transform.localScale = new Vector3(1, 0.1f, 1);
     }
 }

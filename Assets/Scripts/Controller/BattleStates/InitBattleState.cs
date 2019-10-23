@@ -7,6 +7,7 @@ public class InitBattleState : BattleState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Entered " + this.GetType().Name);
         StartCoroutine(Init());
     }
 
@@ -19,7 +20,6 @@ public class InitBattleState : BattleState
         SpawnTestUnits();
         yield return null;
         owner.ChangeState<SelectUnitState>();
-
     }
 
     private void SpawnTestUnits()
@@ -27,6 +27,8 @@ public class InitBattleState : BattleState
         for (int i = 0; i < 3; ++i)
         {
             GameObject instance = Instantiate(owner.heroPrefab) as GameObject;
+            if (i == 0)
+                cameraRig.follow = instance.transform;
             Unit unit = instance.GetComponent<Unit>();
             units.Add(unit);
         }

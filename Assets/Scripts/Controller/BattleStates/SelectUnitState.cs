@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SelectUnitState : BattleState
 {
+    public override void Enter()
+    {
+        Debug.Log("Entered " + this.GetType().Name);
+    }
+
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
         SelectTile(e.info + pos);
